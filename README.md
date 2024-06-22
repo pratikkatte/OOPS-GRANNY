@@ -9,7 +9,7 @@
   </p>
 </p>
 
-# :construction: LETS WIN THIS THING
+# :construction: LETS WIN THIS THING!
 
 > Our focus is on providing patients the information they need before consulting to a doctor. 
 
