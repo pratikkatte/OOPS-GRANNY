@@ -1,22 +1,17 @@
-![hero](Github.png)
+
 
 <p align="center">
-	<h1 align="center"><b>Omniplex</b></h1>
+	<h1 align="center"><b>OOPs Granny</b></h1>
 <p align="center">
-    Open-Source Perplexity
+	Health Perplexity
     <br />
     <br />
-    <a href="https://omniplex.ai">Website</a>
-    ·
-    <a href="https://discord.gg/87Mh7q5ZSd">Discord</a>
-    ·
-    <a href="https://www.reddit.com/r/omniplex_ai">Reddit</a>
   </p>
 </p>
 
-# :construction: Under Active Development
+# :construction: LETS WIN THIS THING
 
-> Our focus is on establishing core functionality and essential features. As we continue to develop Omniplex, we are committed to implementing best practices, refining the codebase, and introducing new features to enhance the user experience.
+> Our focus is on providing patients the information they need before consulting to a doctor. 
 
 ## Get started
 
