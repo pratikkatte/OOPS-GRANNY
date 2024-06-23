@@ -1,7 +1,7 @@
-import React, { useState,useEffect, useRef} from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const ChatContainer = styled.div`
   overflow-y: auto;
   max-height: 75vh;
   min-height: 75vh;
-  margin-bottom: 20px;  // Add some space between chat messages and input area
+  margin-bottom: 20px; // Add some space between chat messages and input area
 `;
 
 const MessageContainer = styled.div`
@@ -36,35 +36,35 @@ const MessageContainer = styled.div`
 `;
 
 const Message = styled.div`
-  background-color: ${({ isUser }) => (isUser ? '#3a3a3a' : '#444')};
+  background-color: ${({ isUser }) => (isUser ? "#3a3a3a" : "#444")};
   color: #e0e0e0;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  align-self: ${({ isUser }) => (isUser ? 'flex-end' : 'flex-start')};
+  align-self: ${({ isUser }) => (isUser ? "flex-end" : "flex-start")};
   max-width: 70%;
 `;
 
 const InputContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-//   max-width: 600px;  // Set max-width for the input container
-//   margin-top: 20px;
-//   padding: 0 10px;  // Add some padding to the sides
-//   bottom: 0;
+  //   display: flex;
+  //   align-items: center;
+  //   width: 100%;
+  //   max-width: 600px;  // Set max-width for the input container
+  //   margin-top: 20px;
+  //   padding: 0 10px;  // Add some padding to the sides
+  //   bottom: 0;
 
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 800px;  // Set max-width for the input container
-  padding: 10px 0;  // Add some padding to the sides
-  background-color: #1e1e1e;  // Ensure the input container is also dark
-  position: fixed;  // Fix the position at the bottom
-  bottom: 0;  // Align it to the bottom
+  max-width: 800px; // Set max-width for the input container
+  padding: 10px 0; // Add some padding to the sides
+  background-color: #1e1e1e; // Ensure the input container is also dark
+  position: fixed; // Fix the position at the bottom
+  bottom: 0; // Align it to the bottom
   top: 1;
-//   left: 0;  // Align it to the left
-//   right: 0;  // Align it to the right
+  //   left: 0;  // Align it to the left
+  //   right: 0;  // Align it to the right
 `;
 
 const Input = styled.input`
@@ -102,15 +102,15 @@ const Title = styled.h1`
 `;
 
 const ChatPage = ({ messages, setMessages }) => {
-//   const [messages, setMessages] = useState([]);
-    // const location = useLocation();
-//   const { messages } = location.state || { messages: [] };
+  //   const [messages, setMessages] = useState([]);
+  // const location = useLocation();
+  //   const { messages } = location.state || { messages: [] };
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const chatEndRef = useRef(null);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleInputChange = (e) => {
@@ -118,7 +118,7 @@ const ChatPage = ({ messages, setMessages }) => {
   };
 
   const handleSendMessage = () => {
-    if (inputValue.trim() === '') return;
+    if (inputValue.trim() === "") return;
 
     const newMessage = {
       text: inputValue,
@@ -126,12 +126,12 @@ const ChatPage = ({ messages, setMessages }) => {
     };
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
-    setInputValue('');
+    setInputValue("");
 
     // Simulate a response from the system
     setTimeout(() => {
       const responseMessage = {
-        text: 'Hello! How can I assist you today?',
+        text: "Hello! How can I assist you today?",
         isUser: false,
       };
       setMessages((prevMessages) => [...prevMessages, responseMessage]);
@@ -139,49 +139,60 @@ const ChatPage = ({ messages, setMessages }) => {
   };
 
   const handleSubmit = async () => {
-    if (inputValue.trim() === '') return;
+    if (inputValue.trim() === "") return;
     const newMessage = {
       text: inputValue,
       isUser: true,
     };
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
-    setInputValue('');
+    setInputValue("");
 
     const formData = new FormData();
-    formData.append('message', inputValue);
+    formData.append("message", inputValue);
 
     try {
-      const response = await axios.post('http://localhost:5000/continue_conversation', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('Response:', response.data);
+      const response = await axios.post(
+        "http://localhost:5000/continue_conversation",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Response:", response.data);
       const responseMessage = {
-        text: response.data.message,
+        text: response.data.response,
         isUser: false,
       };
 
       setMessages((prevMessages) => [...prevMessages, responseMessage]);
     } catch (error) {
-      console.error('Error sending POST request:', error);
+      console.error("Error sending POST request:", error);
     }
   };
 
   return (
     <Container>
-        <Title>Chat Page</Title>
+      <Title>Chat Page</Title>
       <ChatContainer>
         {messages.map((message, index) => (
           <MessageContainer key={index}>
-            <Message isUser={message.isUser}>{message.text}</Message>
+            <Message isUser={message.isUser}>
+              <ReactMarkdown>{message.text}</ReactMarkdown>
+            </Message>
           </MessageContainer>
         ))}
         <div ref={chatEndRef} />
       </ChatContainer>
       <InputContainer>
-        <Input type="text" value={inputValue} onChange={handleInputChange} placeholder="Ask anything..." />
+        <Input
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder="Ask anything..."
+        />
         <Button onClick={handleSubmit}>Send</Button>
       </InputContainer>
     </Container>
