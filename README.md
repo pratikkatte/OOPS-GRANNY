@@ -1,180 +1,70 @@
+# Getting Started with Create React App
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<p align="center">
-	<h1 align="center"><b>OOPs Granny</b></h1>
-<p align="center">
-	Health Perplexity
-    <br />
-    <br />
-  </p>
-</p>
+## Available Scripts
 
-# :construction: LETS WIN THIS THING!
+In the project directory, you can run:
 
-> Our focus is on providing patients the information they need before consulting to a doctor. 
+### `npm start`
 
-## Get started
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-To run the project, modify the code in the Chat component to use the `// Development Code`.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-1. Fork & Clone the repository
+### `npm test`
 
-```bash
-git clone git@github.com:[YOUR_GITHUB_ACCOUNT]/omniplex.git
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-2. Install the dependencies
+### `npm run build`
 
-```bash
-yarn
-```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-3. Fill out secrets in `.env.local`
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```bash
-BING_API_KEY=
-OPENAI_API_KEY=
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-OPENWEATHERMAP_API_KEY=
-ALPHA_VANTAGE_API_KEY=
-FINNHUB_API_KEY=
-```
+### `npm run eject`
 
-4. Run the development server
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-```bash
-yarn dev
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-## Plugins Development
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-> This is just a hacky way but very easy to implement. We will be adding a more robust way to add plugins in the future. Feel free to understand from the sample plugin we have added.
+## Learn More
 
-1. Update the types in `types.ts` to include the new plugin data types.
-2. Update the `tools` api in `api` to include the new plugin function call.
-3. Update the `api.ts` in `utils` file to include the new plugin data.
-4. Update the `chatSlice.ts` in `store` to include the new plugin reducer.
-5. Create a new folder in the `components` directory for the UI of the plugin.
-6. Update the `chat.tsx` to handle the new plugin in `useEffect`.
-7. Call the plugin function and return the data as props to source.
-8. Update the `source.ts` to use the plugin UI.
-9. Lastly Update the `data.ts` in `utils` to show in the plugin tab.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## Multi-LLM Support: Example
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-1. Add the new LLM apiKey in env and add the related npm package.
+### Code Splitting
 
-```bash
-ANTHROPIC_API_KEY=******
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-2. Update the `chat` in `api`
+### Analyzing the Bundle Size
 
-```ts
-import Anthropic from "@anthropic-ai/sdk";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+### Making a Progressive Web App
 
-export const runtime = "edge";
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-export async function POST(req: Request) {
-  const {
-    messages,
-    model,
-    temperature,
-    max_tokens,
-    top_p,
-    frequency_penalty,
-    presence_penalty,
-  } = await req.json();
+### Advanced Configuration
 
-  const response = await anthropic.messages.create({
-    stream: true,
-    model: model,
-    temperature: temperature,
-    max_tokens: max_tokens,
-    top_p: top_p,
-    frequency_penalty: frequency_penalty,
-    presence_penalty: presence_penalty,
-    messages: messages,
-  });
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-  const stream = OpenAIStream(response);
-  return new StreamingTextResponse(stream);
-}
-```
+### Deployment
 
-3. Update the `data` in `utils`
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-```ts
-export const MODELS = [
-  { label: "Claude 3 Haiku", value: "claude-3-haiku-20240307" },
-  { label: "Claude 3 Sonnet", value: "claude-3-sonnet-20240229" },
-  { label: "Claude 3 Opus", value: "claude-3-opus-20240229" },
-];
-```
+### `npm run build` fails to minify
 
-## Disclaimer
-
-> We recently transitioned from the pages directory to the app directory, which involved significant changes to the project structure and architecture. As a result, you may encounter some inconsistencies or rough edges in the codebase.
-
-### Roadmap
-
-- [x] Images & Videos for Search
-- [x] Upload for Vision Model
-- [x] Chat History for Users
-- [x] Shared Chats & Fork
-- [x] Settings for LLMs
-- [x] Custom OG Metadata
-- [x] Faster API Requests
-- [x] Allow Multiple LLMs
-- [x] Plugin Development
-- [x] Function Calling with Gen UI
-
-### App Architecture
-
-- Language: TypeScript
-- Frontend Framework: React
-- State Management: Redux
-- Web Framework: Next.js
-- Backend and Database: Firebase
-- UI Library: NextUI & Tremor
-- CSS Framework: TailwindCSS
-- AI SDK: Vercel AI SDK
-
-### Services
-
-- LLM: OpenAI
-- Search API: Bing
-- Weather API: OpenWeatherMap
-- Stocks API: Alpha Vantage & Finnhub
-- Dictionary API: WordnikFree Dictionary API
-- Hosting & Analytics: Vercel
-- Authentication, Storage & Database: Firebase
-
-## Contributing
-
-We welcome contributions from the community! If you'd like to contribute to Openpanel, please follow these steps:
-
-1. Fork the repository
-2. Create a new branch for your feature or bug fix
-3. Make your changes and commit them with descriptive messages
-4. Push your changes to your forked repository
-5. Submit a pull request to the main repository
-
-Please ensure that your code follows our coding conventions and passes all tests before submitting a pull request.
-
-## License
-
-This project is licensed under the [AGPL-3.0 license](LICENSE).
-
-## Contact
-
-If you have any questions or suggestions, feel free to reach out to us at [Contact](https://bishalsaha.com/contact).
-
-Happy coding! 🚀
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
