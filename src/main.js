@@ -143,9 +143,9 @@ const Main = ({ messages, setMessages }) => {
           },
         }
       );
-      console.log("Response:", response.data);
+      console.log("Response:", response.data.response);
       const responseMessage = {
-        text: "system response",
+        text: response.data.response,
         isUser: false,
       };
 
