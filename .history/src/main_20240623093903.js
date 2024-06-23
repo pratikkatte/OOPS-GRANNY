@@ -24,13 +24,6 @@ const Title = styled.h1`
   margin-bottom: 20px;
 `;
 
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  margin: 0 0 20px;
-  text-align: center;
-  max-width: 600px;
-`;
-
 const ChatBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -175,13 +168,15 @@ const Main = ({ messages, setMessages }) => {
     <Container>
       <Image src="/dr_granny.png" alt="Granny" />
       <Title>What Would Your Granny Say</Title>
-      <Subtitle>
-        Say goodbye to the anxiety and confusion of WebMD searches. Our
-        AI-powered chatbot is designed to provide you with comforting,
-        easy-to-understand insights about your health and nutrition, especially
-        when it comes to interpreting your bloodwork. Just like your Granny
-        would.
-      </Subtitle>
+      <div>
+        <h3>
+          Say goodbye to the anxiety and confusion of WebMD searches. Our
+          AI-powered chatbot is designed to provide you with comforting,
+          easy-to-understand insights about your health and nutrition,
+          especially when it comes to interpreting your bloodwork. Just like
+          your Granny would.
+        </h3>
+      </div>
       <ChatBox>
         <InputContainer>
           <Input

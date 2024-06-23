@@ -175,13 +175,15 @@ const Main = ({ messages, setMessages }) => {
     <Container>
       <Image src="/dr_granny.png" alt="Granny" />
       <Title>What Would Your Granny Say</Title>
-      <Subtitle>
-        Say goodbye to the anxiety and confusion of WebMD searches. Our
-        AI-powered chatbot is designed to provide you with comforting,
-        easy-to-understand insights about your health and nutrition, especially
-        when it comes to interpreting your bloodwork. Just like your Granny
-        would.
-      </Subtitle>
+      <div>
+        <h3>
+          Say goodbye to the anxiety and confusion of WebMD searches. Our
+          AI-powered chatbot is designed to provide you with comforting,
+          easy-to-understand insights about your health and nutrition,
+          especially when it comes to interpreting your bloodwork. Just like
+          your Granny would.
+        </h3>
+      </div>
       <ChatBox>
         <InputContainer>
           <Input
